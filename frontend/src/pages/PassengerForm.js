@@ -24,12 +24,52 @@ export default function PassengerForm({ onAdded }) {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
-      <input name="name" value={data.name} onChange={handleChange} placeholder="Name" />
-      <input name="passport_number" value={data.passport_number} onChange={handleChange} placeholder="Passport Number" />
-      <input name="email" value={data.email} onChange={handleChange} placeholder="Email" />
-      <input name="phone_number" value={data.phone_number} onChange={handleChange} placeholder="Phone Number" />
-      <button type="submit">Add Passenger</button>
+    <form onSubmit={handleSubmit} className="card p-4 mb-4 shadow-sm">
+      <div className="row g-3">
+        <div className="col-md-3">
+          <input
+            type="text"
+            name="name"
+            value={data.name}
+            onChange={handleChange}
+            placeholder="Name"
+            className="form-control"
+          />
+        </div>
+        <div className="col-md-3">
+          <input
+            type="text"
+            name="passport_number"
+            value={data.passport_number}
+            onChange={handleChange}
+            placeholder="Passport Number"
+            className="form-control"
+          />
+        </div>
+        <div className="col-md-3">
+          <input
+            type="email"
+            name="email"
+            value={data.email}
+            onChange={handleChange}
+            placeholder="Email"
+            className="form-control"
+          />
+        </div>
+        <div className="col-md-3">
+          <input
+            type="text"
+            name="phone_number"
+            value={data.phone_number}
+            onChange={handleChange}
+            placeholder="Phone Number"
+            className="form-control"
+          />
+        </div>
+        <div className="col-12 d-grid">
+          <button type="submit" className="btn btn-primary">Add Passenger</button>
+        </div>
+      </div>
     </form>
   );
 }

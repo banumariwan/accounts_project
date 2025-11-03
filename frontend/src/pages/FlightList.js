@@ -14,17 +14,20 @@ export default function FlightList() {
   }, []);
 
   return (
-    <div>
-      <h2>Flights</h2>
+    <div className="container my-5">
+      <h2 className="mb-4 text-primary">Flights</h2>
       <FlightForm onAdded={loadFlights} />
 
-      <table border="1">
-        <thead>
+      <table className="table table-striped table-hover table-bordered shadow-sm">
+        <thead className="table-dark">
           <tr>
             <th>ID</th>
-            <th>Flight</th>
+            <th>Flight Number</th>
             <th>Origin</th>
             <th>Destination</th>
+            <th>Departure</th>
+            <th>Arrival</th>
+            <th>Status</th>
           </tr>
         </thead>
         <tbody>
@@ -34,6 +37,9 @@ export default function FlightList() {
               <td>{f.flight_number}</td>
               <td>{f.origin}</td>
               <td>{f.destination}</td>
+              <td>{new Date(f.departure_time).toLocaleString()}</td>
+              <td>{new Date(f.arrival_time).toLocaleString()}</td>
+              <td>{f.status}</td>
             </tr>
           ))}
         </tbody>

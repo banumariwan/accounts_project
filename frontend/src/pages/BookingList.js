@@ -1,60 +1,47 @@
-import { useState, useEffect } from "react";
+import { useEffect, useState } from "react";
 import api from "../services/api";
+import BookingForm from "./BookingForm";
 
-export default function BookingForm({ onAdded }) {
-  const [data, setData] = useState({
-    flight: "",
-    passenger: "",
-    seat_number: "",
-    status: "Confirmed"
-  });
+export default function BookingList() {
+  const [bookings, setBookings] = useState([]);
 
-  const [flights, setFlights] = useState([]);
-  const [passengers, setPassengers] = useState([]);
-
-  useEffect(() => {
-    api.get("flights/").then((res) => setFlights(res.data));
-    api.get("passengers/").then((res) => setPassengers(res.data));
-  }, []);
-
-  const handleChange = (e) =>
-    setData({ ...data, [e.target.name]: e.target.value });
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    api.post("bookings/", data)
-      .then(() => {
-        alert("Booking added successfully!");
-        onAdded();
-        setData({ flight: "", passenger: "", seat_number: "", status: "Confirmed" });
-      })
-      .catch(() => alert("Error adding booking."));
+  const loadBookings = () => {
+    api.get("bookings/").then((res) => setBookings(res.data));
   };
 
+  useEffect(() => {
+    loadBookings();
+  }, []);
+
   return (
-    <form onSubmit={handleSubmit}>
-      <select name="flight" value={data.flight} onChange={handleChange}>
-        <option value="">Select Flight</option>
-        {flights.map((f) => (
-          <option key={f.id} value={f.id}>{f.flight_number}</option>
-        ))}
-      </select>
+    <div className="container mt-4">
+      <h2 className="mb-3">Bookings</h2>
+      <BookingForm onAdded={loadBookings} />
 
-      <select name="passenger" value={data.passenger} onChange={handleChange}>
-        <option value="">Select Passenger</option>
-        {passengers.map((p) => (
-          <option key={p.id} value={p.id}>{p.name}</option>
-        ))}
-      </select>
-
-      <input name="seat_number" value={data.seat_number} onChange={handleChange} placeholder="Seat Number" />
-
-      <select name="status" value={data.status} onChange={handleChange}>
-        <option value="Confirmed">Confirmed</option>
-        <option value="Cancelled">Cancelled</option>
-      </select>
-
-      <button type="submit">Add Booking</button>
-    </form>
+      <div className="table-responsive">
+        <table className="table table-striped table-hover shadow-sm">
+          <thead className="table-primary">
+            <tr>
+              <th>ID</th>
+              <th>Flight</th>
+              <th>Passenger</th>
+              <th>Seat</th>
+              <th>Status</th>
+            </tr>
+          </thead>
+          <tbody>
+            {bookings.map((b) => (
+              <tr key={b.id}>
+                <td>{b.id}</td>
+                <td>{b.flight?.flight_number}</td>
+                <td>{b.passenger?.name}</td>
+                <td>{b.seat_number}</td>
+                <td>{b.status}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    </div>
   );
 }

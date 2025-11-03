@@ -3,14 +3,21 @@ import api from "../services/api";
 
 export default function Dashboard() {
   const [stats, setStats] = useState({});
-  useEffect(() => { api.get("dashboard/").then(res => setStats(res.data)); }, []);
+
+  useEffect(() => {
+    api.get("dashboard/").then(res => setStats(res.data));
+  }, []);
 
   return (
-    <div className="grid grid-cols-2 gap-4 p-6">
-      {Object.entries(stats).map(([k, v]) => (
-        <div key={k} className="bg-gray-100 p-4 rounded shadow">
-          <h3 className="text-lg font-semibold capitalize">{k.replace('_',' ')}</h3>
-          <p className="text-2xl font-bold">{v}</p>
+    <div className="row g-4">
+      {Object.entries(stats).map(([key, value]) => (
+        <div key={key} className="col-md-3">
+          <div className="card text-white bg-primary h-100 shadow-sm">
+            <div className="card-body">
+              <h5 className="card-title text-capitalize">{key.replace('_', ' ')}</h5>
+              <p className="card-text display-6">{value}</p>
+            </div>
+          </div>
         </div>
       ))}
     </div>

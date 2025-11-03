@@ -32,29 +32,47 @@ export default function BookingForm({ onAdded }) {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
-      <select name="flight" value={data.flight} onChange={handleChange}>
-        <option value="">Select Flight</option>
-        {flights.map((f) => (
-          <option key={f.id} value={f.id}>{f.flight_number}</option>
-        ))}
-      </select>
+    <form onSubmit={handleSubmit} className="card p-4 mb-4 shadow-sm">
+      <div className="row g-3 align-items-center">
+        <div className="col-md-3">
+          <select name="flight" value={data.flight} onChange={handleChange} className="form-select">
+            <option value="">Select Flight</option>
+            {flights.map((f) => (
+              <option key={f.id} value={f.id}>{f.flight_number}</option>
+            ))}
+          </select>
+        </div>
 
-      <select name="passenger" value={data.passenger} onChange={handleChange}>
-        <option value="">Select Passenger</option>
-        {passengers.map((p) => (
-          <option key={p.id} value={p.id}>{p.name}</option>
-        ))}
-      </select>
+        <div className="col-md-3">
+          <select name="passenger" value={data.passenger} onChange={handleChange} className="form-select">
+            <option value="">Select Passenger</option>
+            {passengers.map((p) => (
+              <option key={p.id} value={p.id}>{p.name}</option>
+            ))}
+          </select>
+        </div>
 
-      <input name="seat_number" value={data.seat_number} onChange={handleChange} placeholder="Seat Number" />
+        <div className="col-md-2">
+          <input
+            name="seat_number"
+            value={data.seat_number}
+            onChange={handleChange}
+            placeholder="Seat Number"
+            className="form-control"
+          />
+        </div>
 
-      <select name="status" value={data.status} onChange={handleChange}>
-        <option value="Confirmed">Confirmed</option>
-        <option value="Cancelled">Cancelled</option>
-      </select>
+        <div className="col-md-2">
+          <select name="status" value={data.status} onChange={handleChange} className="form-select">
+            <option value="Confirmed">Confirmed</option>
+            <option value="Cancelled">Cancelled</option>
+          </select>
+        </div>
 
-      <button type="submit">Add Booking</button>
+        <div className="col-md-2 d-grid">
+          <button type="submit" className="btn btn-success">Add Booking</button>
+        </div>
+      </div>
     </form>
   );
 }

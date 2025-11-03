@@ -14,30 +14,34 @@ export default function PassengerList() {
   }, []);
 
   return (
-    <div>
-      <h2>Passengers</h2>
+    <div className="container mt-4">
+      <h2 className="mb-3">Passengers</h2>
       <PassengerForm onAdded={loadPassengers} />
 
-      <table border="1">
-        <thead>
-          <tr>
-            <th>ID</th>
-            <th>Name</th>
-            <th>Passport</th>
-            <th>Email</th>
-          </tr>
-        </thead>
-        <tbody>
-          {passengers.map((p) => (
-            <tr key={p.id}>
-              <td>{p.id}</td>
-              <td>{p.name}</td>
-              <td>{p.passport_number}</td>
-              <td>{p.email}</td>
+      <div className="table-responsive">
+        <table className="table table-striped table-hover shadow-sm">
+          <thead className="table-dark">
+            <tr>
+              <th>ID</th>
+              <th>Name</th>
+              <th>Passport</th>
+              <th>Email</th>
+              <th>Phone</th>
             </tr>
-          ))}
-        </tbody>
-      </table>
+          </thead>
+          <tbody>
+            {passengers.map((p) => (
+              <tr key={p.id}>
+                <td>{p.id}</td>
+                <td>{p.name}</td>
+                <td>{p.passport_number}</td>
+                <td>{p.email}</td>
+                <td>{p.phone_number}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
     </div>
   );
 }
