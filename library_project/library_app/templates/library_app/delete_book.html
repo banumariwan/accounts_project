@@ -1,0 +1,10 @@
+{% extends 'library_app/base.html' %}
+
+{% block content %}
+<form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Delete Book</button>
+</form>
+<a href="{% url 'book_list' %}">Back To List</a>
+{% endblock %}

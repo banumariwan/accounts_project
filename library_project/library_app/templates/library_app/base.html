@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Library Management</title>
+</head>
+<body>
+    <header>
+        <h1>Library Management System</h1>
+        <nav>
+            <a href="{% url 'book_list' %}">Books</a> |
+            <a href="{% url 'add_book' %}">Add Book</a>
+        </nav>
+        <hr>
+    </header>
+    <main>
+        {% block content %}{% endblock %}
+    </main>
+</body>
+</html>
