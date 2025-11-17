@@ -1,182 +1,135 @@
-📚 Django Library Management System
+🔐 Django REST Framework API with Custom User and JWT Authentication
 
-A clean and minimal Library Management System built with Django, focusing on mastering models, relationships, CRUD operations, ORM queries, admin customization, filters, search, pagination, and aggregation.
+A **clean Django REST Framework project** with a **custom user model** and **JWT-based authentication**.  
+Designed to practice **advanced API features** while keeping the structure minimal and easy to understand.
 
-This project is ideal for learning and practicing Django fundamentals with a real-world example — without any styling, just pure functionality.
+---
 
-🚀 Features
-Books
+## 🚀 Features
 
-Add new books
+- **Custom User model** extending `AbstractUser`
+  - Extra fields: `bio`, `age`  
+- **Admin panel integration** showing custom user fields  
+- **JWT Authentication** using SimpleJWT:
+  - Register new users
+  - Login and obtain access + refresh tokens
+  - Refresh access token when expired  
+- **Full API-ready structure** for future expansion:
+  - Permissions
+  - Throttling
+  - Filtering
+  - Pagination  
 
-Edit existing books
+---
 
-Delete books
+## 🛠️ Tech Stack
 
-Assign author and multiple genres
+- Python 3  
+- Django 5  
+- Django REST Framework  
+- SimpleJWT for authentication  
+- SQLite (development database)
 
-Mark books as available/unavailable
+---
 
-Display all books with filters + pagination
+## 📦 Installation
 
-Search & Filter
+1️⃣ Clone the repository:
 
-Search books by title or author
+```bash
+git clone https://github.com/banumariwan/post_api_project.git
+cd post_api_project
+2️⃣ Create and activate a virtual environment:
 
-Filter by:
-
-Genre
-
-Availability
-
-Combine search + filters seamlessly
-
-Pagination
-
-Paginated book list (5 per page)
-
-Admin Panel
-
-Fully customized Django Admin
-
-Search fields
-
-List filters
-
-Horizontal genre selector
-
-Ordering by published date
-
-Clean layout for managing Authors, Genres, and Books
-
-Aggregations
-
-Count books per author
-
-Count books per genre
-
-Display summary data on the home page
-
-🛠️ Tech Stack
-
-Python 3
-
-Django 5
-
-SQLite (default for development)
-
-📦 Installation
-1️⃣ Clone the repository
-git clone https://github.com/banumariwan/django-library-management.git
-cd django-library-management
-
-2️⃣ Create a virtual environment
+bash
+Copy code
 python -m venv env
-source env/bin/activate  # Linux/Mac
-env\Scripts\activate     # Windows
+# Windows
+env\Scripts\activate
+# Linux / Mac
+source env/bin/activate
+3️⃣ Install dependencies:
 
-3️⃣ Install dependencies
-pip install -r requirements.txt
+bash
+Copy code
+pip install djangorestframework
+pip install djangorestframework-simplejwt
+4️⃣ Apply migrations:
 
-4️⃣ Apply migrations
+bash
+Copy code
+python manage.py makemigrations
 python manage.py migrate
+5️⃣ Create superuser (optional, for admin):
 
-5️⃣ Create admin user
+bash
+Copy code
 python manage.py createsuperuser
+6️⃣ Run the server:
 
-6️⃣ Run the server
+bash
+Copy code
 python manage.py runserver
+🔑 Authentication Endpoints
+Endpoint	Method	Description
+/api/register/	POST	Register a new user
+/api/token/	POST	Obtain JWT access + refresh
+/api/token/refresh/	POST	Refresh access token
+
+Example request for /api/token/:
+
+json
+Copy code
+{
+    "username": "banu",
+    "password": "1234"
+}
+Example response:
+
+json
+Copy code
+{
+    "refresh": "<refresh_token>",
+    "access": "<access_token>"
+}
+Use Authorization: Bearer <access_token> header to access protected endpoints.
 
 📁 Project Structure
-library_project/
+bash
+Copy code
+post_api_project/
 │
-├── library_app/
-│   ├── models.py
-│   ├── admin.py
-│   ├── views.py
-│   ├── forms.py
-│   ├── urls.py
-│   └── templates/library_app/
-│       ├── base.html
-│       ├── book_list.html
-│       ├── add_book.html
-│       └── edit_book.html
+├── accounts/
+│   ├── models.py            # Custom User model
+│   ├── serializers.py       # UserSerializer
+│   ├── views.py             # Register API
+│   ├── admin.py             # Admin registration
+│   └── apps.py
 │
-├── library_project/
-│   ├── settings.py
-│   └── urls.py
+├── post_api_project/
+│   ├── settings.py          # AUTH_USER_MODEL + REST_FRAMEWORK config
+│   └── urls.py              # JWT + register routes
 │
 ├── manage.py
 └── README.md
+⭐ Learning Outcomes
+Custom user model in Django
 
-📘 Models Overview
-Author
+Admin panel customization
 
-name
+JWT authentication with access & refresh tokens
 
-bio
+Secure API foundation for advanced features (permissions, throttling, filtering)
 
-(timestamps inherited)
+🔮 Future Improvements
+Add user-specific data (Notes API, tasks, posts, etc.)
 
-Genre
+Add permissions & throttling
 
-name
+Add filtering, search, and pagination
 
-(timestamps inherited)
-
-Book
-
-title
-
-author (FK)
-
-genres (M2M)
-
-published_date
-
-available
-
-(timestamps inherited)
-
-BaseModel (abstract)
-
-created_at
-
-updated_at
-
-🧪 Features to Explore
-
-This project is designed to help you practice:
-
-Django ORM (filters, Q objects, annotations)
-
-Query optimization
-
-CRUD logic and forms
-
-Pagination
-
-Model relationships (FK, M2M)
-
-Admin customization
-
-Clean template structure
-
-📌 Future Improvements (Optional)
-
-User authentication
-
-Book borrowing system
-
-Dashboard analytics
-
-API (Django REST Framework)
-
-Styling using Tailwind or Bootstrap
-
-Dark/light theme
+Document API with Swagger / drf-spectacular
 
 ❤️ Author
-
 Banu Mariwan
 GitHub: banumariwan
